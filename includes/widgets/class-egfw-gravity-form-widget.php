@@ -813,15 +813,51 @@ class Gravity_Form_Widget extends Widget_Base {
 		$button_color      = isset( $settings['button_primary_color'] )
 			? $this->sanitize_css_color( (string) $settings['button_primary_color'] )
 			: '';
+		$input_border_color = isset( $settings['input_border_color'] )
+			? $this->sanitize_css_color( (string) $settings['input_border_color'] )
+			: '';
+		$input_background_color = isset( $settings['input_background_color'] )
+			? $this->sanitize_css_color( (string) $settings['input_background_color'] )
+			: '';
+		$input_text_color = isset( $settings['input_color'] )
+			? $this->sanitize_css_color( (string) $settings['input_color'] )
+			: '';
+		$label_text_color = isset( $settings['label_color'] )
+			? $this->sanitize_css_color( (string) $settings['label_color'] )
+			: '';
 
 		if ( '' !== $button_background ) {
 			$wrapper_classes[] = 'egfw-has-button-bg';
 			$wrapper_styles[]  = '--egfw-button-bg:' . $button_background;
+			$wrapper_classes[] = 'egfw-has-gf-primary';
+			$wrapper_styles[]  = '--egfw-gf-primary:' . $button_background;
 		}
 
 		if ( '' !== $button_color ) {
 			$wrapper_classes[] = 'egfw-has-button-color';
 			$wrapper_styles[]  = '--egfw-button-color:' . $button_color;
+			$wrapper_classes[] = 'egfw-has-gf-primary-contrast';
+			$wrapper_styles[]  = '--egfw-gf-primary-contrast:' . $button_color;
+		}
+
+		if ( '' !== $input_border_color ) {
+			$wrapper_classes[] = 'egfw-has-gf-border';
+			$wrapper_styles[]  = '--egfw-gf-border:' . $input_border_color;
+		}
+
+		if ( '' !== $input_background_color ) {
+			$wrapper_classes[] = 'egfw-has-gf-surface';
+			$wrapper_styles[]  = '--egfw-gf-surface:' . $input_background_color;
+		}
+
+		if ( '' !== $input_text_color ) {
+			$wrapper_classes[] = 'egfw-has-gf-text';
+			$wrapper_styles[]  = '--egfw-gf-text:' . $input_text_color;
+		}
+
+		if ( '' !== $label_text_color ) {
+			$wrapper_classes[] = 'egfw-has-gf-label';
+			$wrapper_styles[]  = '--egfw-gf-label:' . $label_text_color;
 		}
 
 		$style_attr = '';
