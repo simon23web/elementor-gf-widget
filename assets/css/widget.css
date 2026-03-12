@@ -34,6 +34,22 @@
 .egfw-widget.egfw-has-button-bg .gform_wrapper input[type="submit"],
 .egfw-widget.egfw-has-button-bg .gform_wrapper input[type="button"],
 .egfw-widget.egfw-has-button-bg .gform_wrapper button[type="submit"] {
+	--gf-local-bg-color: var(--egfw-button-bg) !important;
+	--gf-local-border-color: var(--egfw-button-bg) !important;
+	background-color: var(--egfw-button-bg) !important;
+	border-color: var(--egfw-button-bg) !important;
+}
+
+.egfw-widget.egfw-has-button-bg .gform_wrapper .gform-theme-button:hover,
+.egfw-widget.egfw-has-button-bg .gform_wrapper .gform-theme-button:focus,
+.egfw-widget.egfw-has-button-bg .gform_wrapper .gform_button:hover,
+.egfw-widget.egfw-has-button-bg .gform_wrapper .gform_button:focus,
+.egfw-widget.egfw-has-button-bg .gform_wrapper input[type="submit"]:hover,
+.egfw-widget.egfw-has-button-bg .gform_wrapper input[type="submit"]:focus,
+.egfw-widget.egfw-has-button-bg .gform_wrapper button[type="submit"]:hover,
+.egfw-widget.egfw-has-button-bg .gform_wrapper button[type="submit"]:focus {
+	--gf-local-bg-color: var(--egfw-button-bg) !important;
+	--gf-local-border-color: var(--egfw-button-bg) !important;
 	background-color: var(--egfw-button-bg) !important;
 	border-color: var(--egfw-button-bg) !important;
 }
@@ -48,6 +64,19 @@
 .egfw-widget.egfw-has-button-color .gform_wrapper input[type="submit"],
 .egfw-widget.egfw-has-button-color .gform_wrapper input[type="button"],
 .egfw-widget.egfw-has-button-color .gform_wrapper button[type="submit"] {
+	--gf-local-color: var(--egfw-button-color) !important;
+	color: var(--egfw-button-color) !important;
+}
+
+.egfw-widget.egfw-has-button-color .gform_wrapper .gform-theme-button:hover,
+.egfw-widget.egfw-has-button-color .gform_wrapper .gform-theme-button:focus,
+.egfw-widget.egfw-has-button-color .gform_wrapper .gform_button:hover,
+.egfw-widget.egfw-has-button-color .gform_wrapper .gform_button:focus,
+.egfw-widget.egfw-has-button-color .gform_wrapper input[type="submit"]:hover,
+.egfw-widget.egfw-has-button-color .gform_wrapper input[type="submit"]:focus,
+.egfw-widget.egfw-has-button-color .gform_wrapper button[type="submit"]:hover,
+.egfw-widget.egfw-has-button-color .gform_wrapper button[type="submit"]:focus {
+	--gf-local-color: var(--egfw-button-color) !important;
 	color: var(--egfw-button-color) !important;
 }
 
