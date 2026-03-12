@@ -469,11 +469,31 @@ class Gravity_Form_Widget extends Widget_Base {
 		return in_array( $value, $allowed, true ) ? $value : '';
 	}
 
+	/**
+	 * @param array<string, string> $attributes Shortcode attributes.
+	 * @return string
+	 */
+	private function build_shortcode( $attributes ) {
+		$parts = array();
+
+		foreach ( $attributes as $name => $value ) {
+			$attribute_name = preg_replace( '/[^a-z0-9_]/i', '', (string) $name );
+			if ( '' === $attribute_name || '' === (string) $value ) {
+				continue;
+			}
+
+			$safe_value = str_replace( "'", '&#039;', (string) $value );
+			$parts[]    = sprintf( "%s='%s'", $attribute_name, $safe_value );
+		}
+
+		return '[gravityform ' . implode( ' ', $parts ) . ']';
+	}
+
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 		$form_id  = isset( $settings['form_id'] ) ? absint( $settings['form_id'] ) : 0;
 
-		if ( ! function_exists( 'gravity_form' ) ) {
+		if ( ! shortcode_exists( 'gravityform' ) ) {
 			echo '<div class="egfw-widget-notice">' . esc_html__( 'Gravity Forms is not active. Activate Gravity Forms to render this widget.', 'elementor-gf-widget' ) . '</div>';
 			return;
 		}
@@ -488,8 +508,20 @@ class Gravity_Form_Widget extends Widget_Base {
 		$ajax             = ! empty( $settings['ajax'] ) && 'yes' === $settings['ajax'];
 		$tabindex         = isset( $settings['tabindex'] ) ? max( 0, (int) $settings['tabindex'] ) : 0;
 		$theme            = ! empty( $settings['theme'] ) ? sanitize_key( (string) $settings['theme'] ) : 'orbital';
-		$field_values     = $this->parse_field_values( isset( $settings['field_values'] ) ? (string) $settings['field_values'] : '' );
+		$field_values_raw = isset( $settings['field_values'] ) ? trim( (string) $settings['field_values'] ) : '';
+		$field_values     = $this->parse_field_values( $field_values_raw );
 		$style_settings   = 'orbital' === $theme ? $this->build_style_settings( $settings ) : array();
+		if ( 'orbital' === $theme && ! empty( $style_settings['theme'] ) ) {
+			unset( $style_settings['theme'] );
+		}
+		if ( 'orbital' === $theme && ! empty( $style_settings ) ) {
+			$style_settings = array_merge(
+				array(
+					'theme' => $theme,
+				),
+				$style_settings
+			);
+		}
 		$style_json       = ! empty( $style_settings ) ? wp_json_encode( $style_settings ) : null;
 
 		$submission_method = $this->sanitize_submission_method( isset( $settings['submission_method'] ) ? (string) $settings['submission_method'] : '' );
@@ -509,21 +541,27 @@ class Gravity_Form_Widget extends Widget_Base {
 			add_filter( 'gform_form_args', $submission_filter, 1000 );
 		}
 
-		echo '<div class="egfw-widget">';
-
-		gravity_form(
-			$form_id,
-			$show_title,
-			$show_description,
-			false,
-			$field_values,
-			$ajax,
-			$tabindex,
-			true,
-			$theme,
-			$style_json
+		$shortcode_attributes = array(
+			'id'          => (string) $form_id,
+			'title'       => $show_title ? 'true' : 'false',
+			'description' => $show_description ? 'true' : 'false',
+			'ajax'        => $ajax ? 'true' : 'false',
+			'tabindex'    => (string) $tabindex,
+			'theme'       => $theme,
 		);
 
+		if ( ! empty( $field_values_raw ) ) {
+			$shortcode_attributes['field_values'] = ! empty( $field_values )
+				? http_build_query( $field_values, '', '&', PHP_QUERY_RFC3986 )
+				: $field_values_raw;
+		}
+
+		if ( ! empty( $style_json ) ) {
+			$shortcode_attributes['styles'] = $style_json;
+		}
+
+		echo '<div class="egfw-widget">';
+		echo do_shortcode( $this->build_shortcode( $shortcode_attributes ) );
 		echo '</div>';
 
 		if ( null !== $submission_filter ) {
