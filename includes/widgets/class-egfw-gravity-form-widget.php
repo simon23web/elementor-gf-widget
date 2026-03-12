@@ -411,6 +411,17 @@ class Gravity_Form_Widget extends Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'sub_label_color',
+			array(
+				'label'     => esc_html__( 'Sub Label Color', 'elementor-gf-widget' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .egfw-widget .gform_wrapper .ginput_complex label, {{WRAPPER}} .egfw-widget .gform_wrapper .gform-field-label--type-sub' => 'color: {{VALUE}};',
+				),
+			)
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -580,7 +591,7 @@ class Gravity_Form_Widget extends Widget_Base {
 			return $hex;
 		}
 
-		if ( preg_match( '/^var\(--[A-Za-z0-9_-]+\)$/', $value ) ) {
+		if ( preg_match( '/^var\(\s*--[A-Za-z0-9_-]+\s*\)$/', $value ) ) {
 			return $value;
 		}
 
@@ -596,31 +607,27 @@ class Gravity_Form_Widget extends Widget_Base {
 	}
 
 	/**
-	 * Build button fallback CSS scoped to a specific widget instance.
+	 * @param string $value Requested submission method.
+	 * @return string
+	 */
+	private function sanitize_submission_method( $value ) {
+		$allowed = array( 'postback', 'iframe', 'ajax' );
+		return in_array( $value, $allowed, true ) ? $value : '';
+	}
+
+	/**
+	 * Build inline style declarations for form buttons.
 	 *
-	 * @param string              $scope_id Scoped wrapper ID.
 	 * @param array<string,mixed> $settings Widget settings.
 	 * @return string
 	 */
-	private function build_button_fallback_css( $scope_id, $settings ) {
+	private function build_inline_button_style( $settings ) {
 		$background = isset( $settings['button_primary_background_color'] )
 			? $this->sanitize_css_color( (string) $settings['button_primary_background_color'] )
 			: '';
 		$color      = isset( $settings['button_primary_color'] )
 			? $this->sanitize_css_color( (string) $settings['button_primary_color'] )
 			: '';
-
-		if ( '' === $background && '' === $color ) {
-			return '';
-		}
-
-		$selectors = '#' . $scope_id . ' .gform_wrapper .gform-theme-button, '
-			. '#' . $scope_id . ' .gform_wrapper .gform_button, '
-			. '#' . $scope_id . ' .gform_wrapper .gform_page_footer .button, '
-			. '#' . $scope_id . ' .gform_wrapper .gform_save_link.button, '
-			. '#' . $scope_id . ' .gform_wrapper input[type="submit"], '
-			. '#' . $scope_id . ' .gform_wrapper input[type="button"], '
-			. '#' . $scope_id . ' .gform_wrapper button[type="submit"]';
 
 		$declarations = array();
 
@@ -633,20 +640,49 @@ class Gravity_Form_Widget extends Widget_Base {
 			$declarations[] = 'color:' . $color . ' !important';
 		}
 
-		if ( empty( $declarations ) ) {
-			return '';
-		}
-
-		return $selectors . '{' . implode( ';', $declarations ) . ';}';
+		return implode( ';', $declarations );
 	}
 
 	/**
-	 * @param string $value Requested submission method.
+	 * Append inline style declarations to button/link markup.
+	 *
+	 * @param string $markup HTML markup.
+	 * @param string $style_declarations Inline style declarations.
 	 * @return string
 	 */
-	private function sanitize_submission_method( $value ) {
-		$allowed = array( 'postback', 'iframe', 'ajax' );
-		return in_array( $value, $allowed, true ) ? $value : '';
+	private function append_inline_style_to_markup( $markup, $style_declarations ) {
+		if ( '' === trim( $markup ) || '' === trim( $style_declarations ) ) {
+			return $markup;
+		}
+
+		$style_declarations = rtrim( trim( $style_declarations ), ';' ) . ';';
+
+		if ( preg_match( '/\sstyle=(["\'])(.*?)\1/i', $markup, $matches ) ) {
+			$current_style = isset( $matches[2] ) ? trim( (string) $matches[2] ) : '';
+			$new_style     = rtrim( $current_style, ';' );
+			if ( '' !== $new_style ) {
+				$new_style .= ';';
+			}
+			$new_style .= $style_declarations;
+
+			$updated_markup = preg_replace(
+				'/\sstyle=(["\'])(.*?)\1/i',
+				' style="' . esc_attr( $new_style ) . '"',
+				$markup,
+				1
+			);
+
+			return null !== $updated_markup ? $updated_markup : $markup;
+		}
+
+		$updated_markup = preg_replace(
+			'/\s*(\/?>)$/',
+			' style="' . esc_attr( $style_declarations ) . '"$1',
+			$markup,
+			1
+		);
+
+		return null !== $updated_markup ? $updated_markup : $markup;
 	}
 
 	/**
@@ -706,6 +742,8 @@ class Gravity_Form_Widget extends Widget_Base {
 
 		$submission_method = $this->sanitize_submission_method( isset( $settings['submission_method'] ) ? (string) $settings['submission_method'] : '' );
 		$submission_filter = null;
+		$button_style      = $this->build_inline_button_style( $settings );
+		$button_filter     = null;
 
 		if ( '' !== $submission_method ) {
 			$submission_filter = static function( $form_args ) use ( $form_id, $submission_method ) {
@@ -719,6 +757,22 @@ class Gravity_Form_Widget extends Widget_Base {
 			};
 
 			add_filter( 'gform_form_args', $submission_filter, 1000 );
+		}
+
+		if ( '' !== $button_style ) {
+			$button_filter = function( $button_markup, $form ) use ( $form_id, $button_style ) {
+				$target_id = isset( $form['id'] ) ? absint( $form['id'] ) : 0;
+				if ( $target_id !== $form_id ) {
+					return $button_markup;
+				}
+
+				return $this->append_inline_style_to_markup( (string) $button_markup, $button_style );
+			};
+
+			add_filter( 'gform_submit_button', $button_filter, 1000, 2 );
+			add_filter( 'gform_next_button', $button_filter, 1000, 2 );
+			add_filter( 'gform_previous_button', $button_filter, 1000, 2 );
+			add_filter( 'gform_savecontinue_link', $button_filter, 1000, 2 );
 		}
 
 		$shortcode_attributes = array(
@@ -740,18 +794,45 @@ class Gravity_Form_Widget extends Widget_Base {
 			$shortcode_attributes['styles'] = $style_json;
 		}
 
-		$scope_id = 'egfw-widget-' . $this->get_id();
-		$css      = $this->build_button_fallback_css( $scope_id, $settings );
+		$scope_id        = 'egfw-widget-' . $this->get_id();
+		$wrapper_classes = array( 'egfw-widget' );
+		$wrapper_styles  = array();
 
-		echo '<div id="' . esc_attr( $scope_id ) . '" class="egfw-widget">';
-		echo do_shortcode( $this->build_shortcode( $shortcode_attributes ) );
-		if ( '' !== $css ) {
-			echo '<style>' . $css . '</style>';
+		$button_background = isset( $settings['button_primary_background_color'] )
+			? $this->sanitize_css_color( (string) $settings['button_primary_background_color'] )
+			: '';
+		$button_color      = isset( $settings['button_primary_color'] )
+			? $this->sanitize_css_color( (string) $settings['button_primary_color'] )
+			: '';
+
+		if ( '' !== $button_background ) {
+			$wrapper_classes[] = 'egfw-has-button-bg';
+			$wrapper_styles[]  = '--egfw-button-bg:' . $button_background;
 		}
+
+		if ( '' !== $button_color ) {
+			$wrapper_classes[] = 'egfw-has-button-color';
+			$wrapper_styles[]  = '--egfw-button-color:' . $button_color;
+		}
+
+		$style_attr = '';
+		if ( ! empty( $wrapper_styles ) ) {
+			$style_attr = ' style="' . esc_attr( implode( ';', $wrapper_styles ) . ';' ) . '"';
+		}
+
+		echo '<div id="' . esc_attr( $scope_id ) . '" class="' . esc_attr( implode( ' ', $wrapper_classes ) ) . '"' . $style_attr . '>';
+		echo do_shortcode( $this->build_shortcode( $shortcode_attributes ) );
 		echo '</div>';
 
 		if ( null !== $submission_filter ) {
 			remove_filter( 'gform_form_args', $submission_filter, 1000 );
+		}
+
+		if ( null !== $button_filter ) {
+			remove_filter( 'gform_submit_button', $button_filter, 1000 );
+			remove_filter( 'gform_next_button', $button_filter, 1000 );
+			remove_filter( 'gform_previous_button', $button_filter, 1000 );
+			remove_filter( 'gform_savecontinue_link', $button_filter, 1000 );
 		}
 	}
 }
