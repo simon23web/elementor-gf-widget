@@ -3,6 +3,7 @@
 namespace EGFW\Widgets;
 
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -276,6 +277,9 @@ class Gravity_Form_Widget extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Button Background Color', 'elementor-gf-widget' ),
 				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button' => 'background-color: {{VALUE}}; border-color: {{VALUE}};',
+				),
 				'condition' => array(
 					'theme' => 'orbital',
 				),
@@ -287,6 +291,9 @@ class Gravity_Form_Widget extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Button Text Color', 'elementor-gf-widget' ),
 				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button' => 'color: {{VALUE}};',
+				),
 				'condition' => array(
 					'theme' => 'orbital',
 				),
@@ -303,6 +310,86 @@ class Gravity_Form_Widget extends Widget_Base {
 				'condition'   => array(
 					'theme' => 'orbital',
 				),
+			)
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_style_layout_typography',
+			array(
+				'label' => esc_html__( 'Layout & Typography', 'elementor-gf-widget' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+
+		$this->add_responsive_control(
+			'field_gap_x',
+			array(
+				'label'      => esc_html__( 'Field Gap X', 'elementor-gf-widget' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 120,
+					),
+					'em' => array(
+						'min' => 0,
+						'max' => 8,
+					),
+					'rem' => array(
+						'min' => 0,
+						'max' => 8,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .egfw-widget .gform_wrapper .gform_fields' => 'column-gap: {{SIZE}}{{UNIT}}; grid-column-gap: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'field_gap_y',
+			array(
+				'label'      => esc_html__( 'Field Gap Y', 'elementor-gf-widget' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 120,
+					),
+					'em' => array(
+						'min' => 0,
+						'max' => 8,
+					),
+					'rem' => array(
+						'min' => 0,
+						'max' => 8,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .egfw-widget .gform_wrapper .gform_fields' => 'row-gap: {{SIZE}}{{UNIT}}; grid-row-gap: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'label_typography_note',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => esc_html__( 'Use the globe icon in Typography to pick a Global Font preset.', 'elementor-gf-widget' ),
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'label_typography',
+				'label'    => esc_html__( 'Label Typography', 'elementor-gf-widget' ),
+				'selector' => '{{WRAPPER}} .egfw-widget .gform_wrapper .gfield_label, {{WRAPPER}} .egfw-widget .gform_wrapper legend.gfield_label, {{WRAPPER}} .egfw-widget .gform_wrapper .gchoice label, {{WRAPPER}} .egfw-widget .gform_wrapper .gfield_consent_label',
 			)
 		);
 
@@ -417,7 +504,7 @@ class Gravity_Form_Widget extends Widget_Base {
 				continue;
 			}
 
-			$sanitized_color = sanitize_hex_color( (string) $settings[ $setting_key ] );
+			$sanitized_color = $this->sanitize_css_color( (string) $settings[ $setting_key ] );
 			if ( $sanitized_color ) {
 				$style_settings[ $style_key ] = $sanitized_color;
 			}
@@ -458,6 +545,36 @@ class Gravity_Form_Widget extends Widget_Base {
 		}
 
 		return $style_settings;
+	}
+
+	/**
+	 * @param string $value Raw color value from Elementor control.
+	 * @return string
+	 */
+	private function sanitize_css_color( $value ) {
+		$value = trim( $value );
+		if ( '' === $value ) {
+			return '';
+		}
+
+		$hex = sanitize_hex_color( $value );
+		if ( ! empty( $hex ) ) {
+			return $hex;
+		}
+
+		if ( preg_match( '/^var\(--[A-Za-z0-9_-]+\)$/', $value ) ) {
+			return $value;
+		}
+
+		if ( preg_match( '/^(?:rgb|hsl)a?\(([^;{}]+)\)$/i', $value ) ) {
+			return $value;
+		}
+
+		if ( in_array( strtolower( $value ), array( 'transparent', 'currentcolor', 'inherit' ), true ) ) {
+			return $value;
+		}
+
+		return '';
 	}
 
 	/**
