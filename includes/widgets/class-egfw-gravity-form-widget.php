@@ -278,7 +278,9 @@ class Gravity_Form_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Button Background Color', 'elementor-gf-widget' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
+					'{{WRAPPER}} .egfw-widget .gform-theme.gform-theme--framework.gform_wrapper' => '--gf-color-primary: {{VALUE}}; --gf-ctrl-btn-bg-color-primary: {{VALUE}}; --gf-ctrl-btn-border-color-primary: {{VALUE}}; --gf-ctrl-btn-bg-color-hover-primary: {{VALUE}}; --gf-ctrl-btn-border-color-hover-primary: {{VALUE}}; --gf-ctrl-btn-bg-color-secondary: {{VALUE}}; --gf-ctrl-btn-border-color-secondary: {{VALUE}}; --gf-ctrl-btn-bg-color-hover-secondary: {{VALUE}}; --gf-ctrl-btn-border-color-hover-secondary: {{VALUE}};',
 					'{{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button' => 'background-color: {{VALUE}}; border-color: {{VALUE}};',
+					'{{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="submit"], {{WRAPPER}} .egfw-widget .gform_wrapper input[type="button"], {{WRAPPER}} .egfw-widget .gform_wrapper button[type="submit"]' => '--gf-local-bg-color: {{VALUE}}; --gf-local-border-color: {{VALUE}}; background-color: {{VALUE}}; border-color: {{VALUE}};',
 				),
 				'condition' => array(
 					'theme' => 'orbital',
@@ -292,7 +294,9 @@ class Gravity_Form_Widget extends Widget_Base {
 				'label'     => esc_html__( 'Button Text Color', 'elementor-gf-widget' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
+					'{{WRAPPER}} .egfw-widget .gform-theme.gform-theme--framework.gform_wrapper' => '--gf-color-primary-contrast: {{VALUE}}; --gf-ctrl-btn-color-primary: {{VALUE}}; --gf-ctrl-btn-color-hover-primary: {{VALUE}}; --gf-ctrl-btn-color-secondary: {{VALUE}}; --gf-ctrl-btn-color-hover-secondary: {{VALUE}};',
 					'{{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="submit"], {{WRAPPER}} .egfw-widget .gform_wrapper input[type="button"], {{WRAPPER}} .egfw-widget .gform_wrapper button[type="submit"]' => '--gf-local-color: {{VALUE}}; color: {{VALUE}};',
 				),
 				'condition' => array(
 					'theme' => 'orbital',

@@ -41,6 +41,7 @@ class Plugin {
 		add_action( 'elementor/widgets/register', array( $this, 'register_widgets' ) );
 		add_action( 'elementor/frontend/after_enqueue_styles', array( $this, 'enqueue_styles' ) );
 		add_action( 'elementor/editor/before_enqueue_styles', array( $this, 'enqueue_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 20 );
 	}
 
 	/**
@@ -90,4 +91,3 @@ class Plugin {
 		);
 	}
 }
-
