@@ -632,11 +632,20 @@ class Gravity_Form_Widget extends Widget_Base {
 		$declarations = array();
 
 		if ( '' !== $background ) {
+			$declarations[] = '--gf-ctrl-btn-bg-color-primary:' . $background . ' !important';
+			$declarations[] = '--gf-ctrl-btn-border-color-primary:' . $background . ' !important';
+			$declarations[] = '--gf-ctrl-btn-bg-color-secondary:' . $background . ' !important';
+			$declarations[] = '--gf-ctrl-btn-border-color-secondary:' . $background . ' !important';
+			$declarations[] = '--gf-local-bg-color:' . $background . ' !important';
+			$declarations[] = '--gf-local-border-color:' . $background . ' !important';
 			$declarations[] = 'background-color:' . $background . ' !important';
 			$declarations[] = 'border-color:' . $background . ' !important';
 		}
 
 		if ( '' !== $color ) {
+			$declarations[] = '--gf-ctrl-btn-color-primary:' . $color . ' !important';
+			$declarations[] = '--gf-ctrl-btn-color-secondary:' . $color . ' !important';
+			$declarations[] = '--gf-local-color:' . $color . ' !important';
 			$declarations[] = 'color:' . $color . ' !important';
 		}
 

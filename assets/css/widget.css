@@ -6,6 +6,24 @@
 	margin-bottom: 0;
 }
 
+.egfw-widget.egfw-has-button-bg .gform-theme.gform-theme--framework.gform_wrapper {
+	--gf-ctrl-btn-bg-color-primary: var(--egfw-button-bg) !important;
+	--gf-ctrl-btn-border-color-primary: var(--egfw-button-bg) !important;
+	--gf-ctrl-btn-bg-color-hover-primary: var(--egfw-button-bg) !important;
+	--gf-ctrl-btn-border-color-hover-primary: var(--egfw-button-bg) !important;
+	--gf-ctrl-btn-bg-color-secondary: var(--egfw-button-bg) !important;
+	--gf-ctrl-btn-border-color-secondary: var(--egfw-button-bg) !important;
+	--gf-ctrl-btn-bg-color-hover-secondary: var(--egfw-button-bg) !important;
+	--gf-ctrl-btn-border-color-hover-secondary: var(--egfw-button-bg) !important;
+}
+
+.egfw-widget.egfw-has-button-color .gform-theme.gform-theme--framework.gform_wrapper {
+	--gf-ctrl-btn-color-primary: var(--egfw-button-color) !important;
+	--gf-ctrl-btn-color-hover-primary: var(--egfw-button-color) !important;
+	--gf-ctrl-btn-color-secondary: var(--egfw-button-color) !important;
+	--gf-ctrl-btn-color-hover-secondary: var(--egfw-button-color) !important;
+}
+
 .egfw-widget.egfw-has-button-bg .gform_wrapper .gform-theme-button,
 .egfw-widget.egfw-has-button-bg .gform_wrapper .gform-theme-button--control,
 .egfw-widget.egfw-has-button-bg .gform_wrapper .gform_button,
