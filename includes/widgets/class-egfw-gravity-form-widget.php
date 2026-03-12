@@ -393,6 +393,24 @@ class Gravity_Form_Widget extends Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'sub_label_typography_note',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => esc_html__( 'Use Sub Label Typography for Name/Address/etc. sub labels. Global presets are available via the globe icon.', 'elementor-gf-widget' ),
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'sub_label_typography',
+				'label'    => esc_html__( 'Sub Label Typography', 'elementor-gf-widget' ),
+				'selector' => '{{WRAPPER}} .egfw-widget .gform_wrapper .ginput_complex label, {{WRAPPER}} .egfw-widget .gform_wrapper .gform-field-label--type-sub',
+			)
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -578,6 +596,51 @@ class Gravity_Form_Widget extends Widget_Base {
 	}
 
 	/**
+	 * Build button fallback CSS scoped to a specific widget instance.
+	 *
+	 * @param string              $scope_id Scoped wrapper ID.
+	 * @param array<string,mixed> $settings Widget settings.
+	 * @return string
+	 */
+	private function build_button_fallback_css( $scope_id, $settings ) {
+		$background = isset( $settings['button_primary_background_color'] )
+			? $this->sanitize_css_color( (string) $settings['button_primary_background_color'] )
+			: '';
+		$color      = isset( $settings['button_primary_color'] )
+			? $this->sanitize_css_color( (string) $settings['button_primary_color'] )
+			: '';
+
+		if ( '' === $background && '' === $color ) {
+			return '';
+		}
+
+		$selectors = '#' . $scope_id . ' .gform_wrapper .gform-theme-button, '
+			. '#' . $scope_id . ' .gform_wrapper .gform_button, '
+			. '#' . $scope_id . ' .gform_wrapper .gform_page_footer .button, '
+			. '#' . $scope_id . ' .gform_wrapper .gform_save_link.button, '
+			. '#' . $scope_id . ' .gform_wrapper input[type="submit"], '
+			. '#' . $scope_id . ' .gform_wrapper input[type="button"], '
+			. '#' . $scope_id . ' .gform_wrapper button[type="submit"]';
+
+		$declarations = array();
+
+		if ( '' !== $background ) {
+			$declarations[] = 'background-color:' . $background . ' !important';
+			$declarations[] = 'border-color:' . $background . ' !important';
+		}
+
+		if ( '' !== $color ) {
+			$declarations[] = 'color:' . $color . ' !important';
+		}
+
+		if ( empty( $declarations ) ) {
+			return '';
+		}
+
+		return $selectors . '{' . implode( ';', $declarations ) . ';}';
+	}
+
+	/**
 	 * @param string $value Requested submission method.
 	 * @return string
 	 */
@@ -677,8 +740,14 @@ class Gravity_Form_Widget extends Widget_Base {
 			$shortcode_attributes['styles'] = $style_json;
 		}
 
-		echo '<div class="egfw-widget">';
+		$scope_id = 'egfw-widget-' . $this->get_id();
+		$css      = $this->build_button_fallback_css( $scope_id, $settings );
+
+		echo '<div id="' . esc_attr( $scope_id ) . '" class="egfw-widget">';
 		echo do_shortcode( $this->build_shortcode( $shortcode_attributes ) );
+		if ( '' !== $css ) {
+			echo '<style>' . $css . '</style>';
+		}
 		echo '</div>';
 
 		if ( null !== $submission_filter ) {
