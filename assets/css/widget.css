@@ -1,0 +1,18 @@
+.egfw-widget {
+	width: 100%;
+}
+
+.egfw-widget .gform_wrapper {
+	margin-bottom: 0;
+}
+
+.egfw-widget-notice {
+	padding: 12px 14px;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+	background: #fff;
+	color: #1d2327;
+	font-size: 14px;
+	line-height: 1.4;
+}
+
