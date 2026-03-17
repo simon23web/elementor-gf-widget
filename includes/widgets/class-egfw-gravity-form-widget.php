@@ -698,85 +698,6 @@ class Gravity_Form_Widget extends Widget_Base {
 	}
 
 	/**
-	 * Build inline style declarations for form buttons.
-	 *
-	 * @param array<string,mixed> $settings Widget settings.
-	 * @return string
-	 */
-	private function build_inline_button_style( $settings ) {
-		$background = isset( $settings['button_primary_background_color'] )
-			? $this->sanitize_css_color( (string) $settings['button_primary_background_color'] )
-			: '';
-		$color      = isset( $settings['button_primary_color'] )
-			? $this->sanitize_css_color( (string) $settings['button_primary_color'] )
-			: '';
-
-		$declarations = array();
-
-		if ( '' !== $background ) {
-			$declarations[] = '--gf-ctrl-btn-bg-color-primary:' . $background . ' !important';
-			$declarations[] = '--gf-ctrl-btn-border-color-primary:' . $background . ' !important';
-			$declarations[] = '--gf-ctrl-btn-bg-color-secondary:' . $background . ' !important';
-			$declarations[] = '--gf-ctrl-btn-border-color-secondary:' . $background . ' !important';
-			$declarations[] = '--gf-local-bg-color:' . $background . ' !important';
-			$declarations[] = '--gf-local-border-color:' . $background . ' !important';
-			$declarations[] = 'background-color:' . $background . ' !important';
-			$declarations[] = 'border-color:' . $background . ' !important';
-		}
-
-		if ( '' !== $color ) {
-			$declarations[] = '--gf-ctrl-btn-color-primary:' . $color . ' !important';
-			$declarations[] = '--gf-ctrl-btn-color-secondary:' . $color . ' !important';
-			$declarations[] = '--gf-local-color:' . $color . ' !important';
-			$declarations[] = 'color:' . $color . ' !important';
-		}
-
-		return implode( ';', $declarations );
-	}
-
-	/**
-	 * Append inline style declarations to button/link markup.
-	 *
-	 * @param string $markup HTML markup.
-	 * @param string $style_declarations Inline style declarations.
-	 * @return string
-	 */
-	private function append_inline_style_to_markup( $markup, $style_declarations ) {
-		if ( '' === trim( $markup ) || '' === trim( $style_declarations ) ) {
-			return $markup;
-		}
-
-		$style_declarations = rtrim( trim( $style_declarations ), ';' ) . ';';
-
-		if ( preg_match( '/\sstyle=(["\'])(.*?)\1/i', $markup, $matches ) ) {
-			$current_style = isset( $matches[2] ) ? trim( (string) $matches[2] ) : '';
-			$new_style     = rtrim( $current_style, ';' );
-			if ( '' !== $new_style ) {
-				$new_style .= ';';
-			}
-			$new_style .= $style_declarations;
-
-			$updated_markup = preg_replace(
-				'/\sstyle=(["\'])(.*?)\1/i',
-				' style="' . esc_attr( $new_style ) . '"',
-				$markup,
-				1
-			);
-
-			return null !== $updated_markup ? $updated_markup : $markup;
-		}
-
-		$updated_markup = preg_replace(
-			'/\s*(\/?>)$/',
-			' style="' . esc_attr( $style_declarations ) . '"$1',
-			$markup,
-			1
-		);
-
-		return null !== $updated_markup ? $updated_markup : $markup;
-	}
-
-	/**
 	 * @param array<string, string> $attributes Shortcode attributes.
 	 * @return string
 	 */
@@ -833,8 +754,6 @@ class Gravity_Form_Widget extends Widget_Base {
 
 		$submission_method = $this->sanitize_submission_method( isset( $settings['submission_method'] ) ? (string) $settings['submission_method'] : '' );
 		$submission_filter = null;
-		$button_style      = $this->build_inline_button_style( $settings );
-		$button_filter     = null;
 
 		if ( '' !== $submission_method ) {
 			$submission_filter = static function( $form_args ) use ( $form_id, $submission_method ) {
@@ -848,22 +767,6 @@ class Gravity_Form_Widget extends Widget_Base {
 			};
 
 			add_filter( 'gform_form_args', $submission_filter, 1000 );
-		}
-
-		if ( '' !== $button_style ) {
-			$button_filter = function( $button_markup, $form ) use ( $form_id, $button_style ) {
-				$target_id = isset( $form['id'] ) ? absint( $form['id'] ) : 0;
-				if ( $target_id !== $form_id ) {
-					return $button_markup;
-				}
-
-				return $this->append_inline_style_to_markup( (string) $button_markup, $button_style );
-			};
-
-			add_filter( 'gform_submit_button', $button_filter, 1000, 2 );
-			add_filter( 'gform_next_button', $button_filter, 1000, 2 );
-			add_filter( 'gform_previous_button', $button_filter, 1000, 2 );
-			add_filter( 'gform_savecontinue_link', $button_filter, 1000, 2 );
 		}
 
 		$shortcode_attributes = array(
@@ -995,13 +898,6 @@ class Gravity_Form_Widget extends Widget_Base {
 
 		if ( null !== $submission_filter ) {
 			remove_filter( 'gform_form_args', $submission_filter, 1000 );
-		}
-
-		if ( null !== $button_filter ) {
-			remove_filter( 'gform_submit_button', $button_filter, 1000 );
-			remove_filter( 'gform_next_button', $button_filter, 1000 );
-			remove_filter( 'gform_previous_button', $button_filter, 1000 );
-			remove_filter( 'gform_savecontinue_link', $button_filter, 1000 );
 		}
 	}
 }
