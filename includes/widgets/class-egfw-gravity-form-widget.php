@@ -285,6 +285,36 @@ class Gravity_Form_Widget extends Widget_Base {
 				'condition' => array(
 					'theme' => 'orbital',
 				),
+				)
+			);
+
+		$this->add_responsive_control(
+			'button_border_radius',
+			array(
+				'label'      => esc_html__( 'Button Radius', 'elementor-gf-widget' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 100,
+					),
+					'em' => array(
+						'min' => 0,
+						'max' => 6,
+					),
+					'rem' => array(
+						'min' => 0,
+						'max' => 6,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .egfw-widget .gform-theme.gform-theme--framework.gform_wrapper' => '--gf-ctrl-btn-radius: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_next_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_previous_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="submit"], {{WRAPPER}} .egfw-widget .gform_wrapper input[type="button"], {{WRAPPER}} .egfw-widget .gform_wrapper button[type="submit"]' => '--gf-local-radius: {{SIZE}}{{UNIT}}; border-radius: {{SIZE}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'theme' => 'orbital',
+				),
 			)
 		);
 
