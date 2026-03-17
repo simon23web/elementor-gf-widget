@@ -331,6 +331,36 @@ class Gravity_Form_Widget extends Widget_Base {
 				'condition' => array(
 					'theme' => 'orbital',
 				),
+				)
+			);
+
+		$this->add_control(
+			'button_hover_background_color',
+			array(
+				'label'     => esc_html__( 'Button Hover Background', 'elementor-gf-widget' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .egfw-widget .gform-theme.gform-theme--framework.gform_wrapper' => '--gf-ctrl-btn-bg-color-hover-primary: {{VALUE}}; --gf-ctrl-btn-border-color-hover-primary: {{VALUE}}; --gf-ctrl-btn-bg-color-hover-secondary: {{VALUE}}; --gf-ctrl-btn-border-color-hover-secondary: {{VALUE}};',
+					'{{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_next_button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_next_button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_previous_button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_previous_button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="submit"]:hover, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="submit"]:focus, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="button"]:hover, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="button"]:focus, {{WRAPPER}} .egfw-widget .gform_wrapper button[type="submit"]:hover, {{WRAPPER}} .egfw-widget .gform_wrapper button[type="submit"]:focus' => '--gf-local-bg-color: {{VALUE}}; --gf-local-border-color: {{VALUE}}; background-color: {{VALUE}}; border-color: {{VALUE}};',
+				),
+				'condition' => array(
+					'theme' => 'orbital',
+				),
+			)
+		);
+
+		$this->add_control(
+			'button_hover_color',
+			array(
+				'label'     => esc_html__( 'Button Hover Text Color', 'elementor-gf-widget' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .egfw-widget .gform-theme.gform-theme--framework.gform_wrapper' => '--gf-ctrl-btn-color-hover-primary: {{VALUE}}; --gf-ctrl-btn-color-hover-secondary: {{VALUE}};',
+					'{{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_next_button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_next_button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_previous_button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_previous_button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="submit"]:hover, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="submit"]:focus, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="button"]:hover, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="button"]:focus, {{WRAPPER}} .egfw-widget .gform_wrapper button[type="submit"]:hover, {{WRAPPER}} .egfw-widget .gform_wrapper button[type="submit"]:focus' => '--gf-local-color: {{VALUE}}; color: {{VALUE}};',
+				),
+				'condition' => array(
+					'theme' => 'orbital',
+				),
 			)
 		);
 
