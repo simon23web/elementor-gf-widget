@@ -361,6 +361,24 @@ class Gravity_Form_Widget extends Widget_Base {
 				'condition' => array(
 					'theme' => 'orbital',
 				),
+				)
+			);
+
+		$this->add_control(
+			'button_typography_note',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => esc_html__( 'Use the globe icon in Button Typography to pick a Global Font preset.', 'elementor-gf-widget' ),
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'button_typography',
+				'label'    => esc_html__( 'Button Typography', 'elementor-gf-widget' ),
+				'selector' => '{{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_next_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_previous_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="submit"], {{WRAPPER}} .egfw-widget .gform_wrapper input[type="button"], {{WRAPPER}} .egfw-widget .gform_wrapper button[type="submit"]',
 			)
 		);
 
@@ -877,6 +895,12 @@ class Gravity_Form_Widget extends Widget_Base {
 		$button_color      = isset( $settings['button_primary_color'] )
 			? $this->sanitize_css_color( (string) $settings['button_primary_color'] )
 			: '';
+		$button_hover_background = isset( $settings['button_hover_background_color'] )
+			? $this->sanitize_css_color( (string) $settings['button_hover_background_color'] )
+			: '';
+		$button_hover_color      = isset( $settings['button_hover_color'] )
+			? $this->sanitize_css_color( (string) $settings['button_hover_color'] )
+			: '';
 		$input_border_color = isset( $settings['input_border_color'] )
 			? $this->sanitize_css_color( (string) $settings['input_border_color'] )
 			: '';
@@ -902,6 +926,16 @@ class Gravity_Form_Widget extends Widget_Base {
 			$wrapper_styles[]  = '--egfw-button-color:' . $button_color;
 			$wrapper_classes[] = 'egfw-has-gf-primary-contrast';
 			$wrapper_styles[]  = '--egfw-gf-primary-contrast:' . $button_color;
+		}
+
+		if ( '' !== $button_hover_background ) {
+			$wrapper_classes[] = 'egfw-has-button-hover-bg';
+			$wrapper_styles[]  = '--egfw-button-hover-bg:' . $button_hover_background;
+		}
+
+		if ( '' !== $button_hover_color ) {
+			$wrapper_classes[] = 'egfw-has-button-hover-color';
+			$wrapper_styles[]  = '--egfw-button-hover-color:' . $button_hover_color;
 		}
 
 		if ( '' !== $input_border_color ) {
