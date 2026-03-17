@@ -378,7 +378,7 @@ class Gravity_Form_Widget extends Widget_Base {
 			array(
 				'name'     => 'button_typography',
 				'label'    => esc_html__( 'Button Typography', 'elementor-gf-widget' ),
-				'selector' => '{{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_next_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_previous_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="submit"], {{WRAPPER}} .egfw-widget .gform_wrapper input[type="button"], {{WRAPPER}} .egfw-widget .gform_wrapper button[type="submit"]',
+				'selector' => '{{WRAPPER}} .egfw-widget',
 			)
 		);
 
@@ -913,6 +913,28 @@ class Gravity_Form_Widget extends Widget_Base {
 		$label_text_color = isset( $settings['label_color'] )
 			? $this->sanitize_css_color( (string) $settings['label_color'] )
 			: '';
+		$button_typography_keys = array(
+			'button_typography_typography',
+			'button_typography_font_family',
+			'button_typography_font_size',
+			'button_typography_font_weight',
+			'button_typography_text_transform',
+			'button_typography_font_style',
+			'button_typography_text_decoration',
+			'button_typography_line_height',
+			'button_typography_letter_spacing',
+			'button_typography_word_spacing',
+		);
+		$has_button_typography = false;
+
+		foreach ( $button_typography_keys as $button_typography_key ) {
+			if ( empty( $settings[ $button_typography_key ] ) ) {
+				continue;
+			}
+
+			$has_button_typography = true;
+			break;
+		}
 
 		if ( '' !== $button_background ) {
 			$wrapper_classes[] = 'egfw-has-button-bg';
@@ -956,6 +978,10 @@ class Gravity_Form_Widget extends Widget_Base {
 		if ( '' !== $label_text_color ) {
 			$wrapper_classes[] = 'egfw-has-gf-label';
 			$wrapper_styles[]  = '--egfw-gf-label:' . $label_text_color;
+		}
+
+		if ( $has_button_typography ) {
+			$wrapper_classes[] = 'egfw-has-button-typography';
 		}
 
 		$style_attr = '';

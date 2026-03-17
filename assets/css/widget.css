@@ -72,6 +72,26 @@
 	--gf-ctrl-btn-color-hover-secondary: var(--egfw-button-hover-color) !important;
 }
 
+.egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper .button,
+.egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper .gform-theme-button,
+.egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper .gform_button,
+.egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper .gform_next_button,
+.egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper .gform_previous_button,
+.egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper .gform_page_footer .button,
+.egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper .gform_save_link.button,
+.egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper input[type="submit"],
+.egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper input[type="button"],
+.egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper button[type="submit"] {
+	font-family: inherit !important;
+	font-size: inherit !important;
+	font-style: inherit !important;
+	font-weight: inherit !important;
+	letter-spacing: inherit !important;
+	line-height: inherit !important;
+	text-decoration: inherit !important;
+	text-transform: inherit !important;
+}
+
 .egfw-widget.egfw-has-button-bg .gform_wrapper .gform-theme-button,
 .egfw-widget.egfw-has-button-bg .gform_wrapper .gform-theme-button--control,
 .egfw-widget.egfw-has-button-bg .gform_wrapper .gform_button,
@@ -126,6 +146,28 @@
 	border-color: var(--egfw-button-hover-bg) !important;
 }
 
+.egfw-widget.egfw-has-button-hover-bg .gform-theme.gform-theme--framework.gform_wrapper .button:hover,
+.egfw-widget.egfw-has-button-hover-bg .gform-theme.gform-theme--framework.gform_wrapper .button:focus,
+.egfw-widget.egfw-has-button-hover-bg .gform-theme.gform-theme--framework.gform_wrapper .gform-theme-button:hover,
+.egfw-widget.egfw-has-button-hover-bg .gform-theme.gform-theme--framework.gform_wrapper .gform-theme-button:focus,
+.egfw-widget.egfw-has-button-hover-bg .gform-theme.gform-theme--framework.gform_wrapper .gform_button:hover,
+.egfw-widget.egfw-has-button-hover-bg .gform-theme.gform-theme--framework.gform_wrapper .gform_button:focus,
+.egfw-widget.egfw-has-button-hover-bg .gform-theme.gform-theme--framework.gform_wrapper .gform_next_button:hover,
+.egfw-widget.egfw-has-button-hover-bg .gform-theme.gform-theme--framework.gform_wrapper .gform_next_button:focus,
+.egfw-widget.egfw-has-button-hover-bg .gform-theme.gform-theme--framework.gform_wrapper .gform_previous_button:hover,
+.egfw-widget.egfw-has-button-hover-bg .gform-theme.gform-theme--framework.gform_wrapper .gform_previous_button:focus,
+.egfw-widget.egfw-has-button-hover-bg .gform-theme.gform-theme--framework.gform_wrapper input[type="submit"]:hover,
+.egfw-widget.egfw-has-button-hover-bg .gform-theme.gform-theme--framework.gform_wrapper input[type="submit"]:focus,
+.egfw-widget.egfw-has-button-hover-bg .gform-theme.gform-theme--framework.gform_wrapper input[type="button"]:hover,
+.egfw-widget.egfw-has-button-hover-bg .gform-theme.gform-theme--framework.gform_wrapper input[type="button"]:focus,
+.egfw-widget.egfw-has-button-hover-bg .gform-theme.gform-theme--framework.gform_wrapper button[type="submit"]:hover,
+.egfw-widget.egfw-has-button-hover-bg .gform-theme.gform-theme--framework.gform_wrapper button[type="submit"]:focus {
+	--gf-local-bg-color: var(--egfw-button-hover-bg) !important;
+	--gf-local-border-color: var(--egfw-button-hover-bg) !important;
+	background-color: var(--egfw-button-hover-bg) !important;
+	border-color: var(--egfw-button-hover-bg) !important;
+}
+
 .egfw-widget.egfw-has-button-color .gform_wrapper .gform-theme-button,
 .egfw-widget.egfw-has-button-color .gform_wrapper .gform-theme-button--control,
 .egfw-widget.egfw-has-button-color .gform_wrapper .gform_button,
@@ -170,6 +212,26 @@
 .egfw-widget.egfw-has-button-hover-color .gform_wrapper input[type="button"]:focus,
 .egfw-widget.egfw-has-button-hover-color .gform_wrapper button[type="submit"]:hover,
 .egfw-widget.egfw-has-button-hover-color .gform_wrapper button[type="submit"]:focus {
+	--gf-local-color: var(--egfw-button-hover-color) !important;
+	color: var(--egfw-button-hover-color) !important;
+}
+
+.egfw-widget.egfw-has-button-hover-color .gform-theme.gform-theme--framework.gform_wrapper .button:hover,
+.egfw-widget.egfw-has-button-hover-color .gform-theme.gform-theme--framework.gform_wrapper .button:focus,
+.egfw-widget.egfw-has-button-hover-color .gform-theme.gform-theme--framework.gform_wrapper .gform-theme-button:hover,
+.egfw-widget.egfw-has-button-hover-color .gform-theme.gform-theme--framework.gform_wrapper .gform-theme-button:focus,
+.egfw-widget.egfw-has-button-hover-color .gform-theme.gform-theme--framework.gform_wrapper .gform_button:hover,
+.egfw-widget.egfw-has-button-hover-color .gform-theme.gform-theme--framework.gform_wrapper .gform_button:focus,
+.egfw-widget.egfw-has-button-hover-color .gform-theme.gform-theme--framework.gform_wrapper .gform_next_button:hover,
+.egfw-widget.egfw-has-button-hover-color .gform-theme.gform-theme--framework.gform_wrapper .gform_next_button:focus,
+.egfw-widget.egfw-has-button-hover-color .gform-theme.gform-theme--framework.gform_wrapper .gform_previous_button:hover,
+.egfw-widget.egfw-has-button-hover-color .gform-theme.gform-theme--framework.gform_wrapper .gform_previous_button:focus,
+.egfw-widget.egfw-has-button-hover-color .gform-theme.gform-theme--framework.gform_wrapper input[type="submit"]:hover,
+.egfw-widget.egfw-has-button-hover-color .gform-theme.gform-theme--framework.gform_wrapper input[type="submit"]:focus,
+.egfw-widget.egfw-has-button-hover-color .gform-theme.gform-theme--framework.gform_wrapper input[type="button"]:hover,
+.egfw-widget.egfw-has-button-hover-color .gform-theme.gform-theme--framework.gform_wrapper input[type="button"]:focus,
+.egfw-widget.egfw-has-button-hover-color .gform-theme.gform-theme--framework.gform_wrapper button[type="submit"]:hover,
+.egfw-widget.egfw-has-button-hover-color .gform-theme.gform-theme--framework.gform_wrapper button[type="submit"]:focus {
 	--gf-local-color: var(--egfw-button-hover-color) !important;
 	color: var(--egfw-button-hover-color) !important;
 }
