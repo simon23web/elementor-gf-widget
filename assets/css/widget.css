@@ -82,6 +82,22 @@
 .egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper input[type="submit"],
 .egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper input[type="button"],
 .egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper button[type="submit"] {
+	--gf-ctrl-btn-font-family: inherit !important;
+	--gf-ctrl-btn-font-size: inherit !important;
+	--gf-ctrl-btn-font-style: inherit !important;
+	--gf-ctrl-btn-font-weight: inherit !important;
+	--gf-ctrl-btn-letter-spacing: inherit !important;
+	--gf-ctrl-btn-line-height: inherit !important;
+	--gf-ctrl-btn-text-decoration: inherit !important;
+	--gf-ctrl-btn-text-transform: inherit !important;
+	--gf-local-font-family: inherit !important;
+	--gf-local-font-size: inherit !important;
+	--gf-local-font-style: inherit !important;
+	--gf-local-font-weight: inherit !important;
+	--gf-local-letter-spacing: inherit !important;
+	--gf-local-line-height: inherit !important;
+	--gf-local-text-decoration: inherit !important;
+	--gf-local-text-transform: inherit !important;
 	font-family: inherit !important;
 	font-size: inherit !important;
 	font-style: inherit !important;
