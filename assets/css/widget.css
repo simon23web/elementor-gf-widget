@@ -82,30 +82,30 @@
 .egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper input[type="submit"],
 .egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper input[type="button"],
 .egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper button[type="submit"] {
-	--gf-ctrl-btn-font-family: inherit !important;
-	--gf-ctrl-btn-font-size: inherit !important;
-	--gf-ctrl-btn-font-style: inherit !important;
-	--gf-ctrl-btn-font-weight: inherit !important;
-	--gf-ctrl-btn-letter-spacing: inherit !important;
-	--gf-ctrl-btn-line-height: inherit !important;
-	--gf-ctrl-btn-text-decoration: inherit !important;
-	--gf-ctrl-btn-text-transform: inherit !important;
-	--gf-local-font-family: inherit !important;
-	--gf-local-font-size: inherit !important;
-	--gf-local-font-style: inherit !important;
-	--gf-local-font-weight: inherit !important;
-	--gf-local-letter-spacing: inherit !important;
-	--gf-local-line-height: inherit !important;
-	--gf-local-text-decoration: inherit !important;
-	--gf-local-text-transform: inherit !important;
-	font-family: inherit !important;
-	font-size: inherit !important;
-	font-style: inherit !important;
-	font-weight: inherit !important;
-	letter-spacing: inherit !important;
-	line-height: inherit !important;
-	text-decoration: inherit !important;
-	text-transform: inherit !important;
+	--gf-ctrl-btn-font-family: var(--egfw-button-font-family) !important;
+	--gf-ctrl-btn-font-size: var(--egfw-button-font-size) !important;
+	--gf-ctrl-btn-font-style: var(--egfw-button-font-style) !important;
+	--gf-ctrl-btn-font-weight: var(--egfw-button-font-weight) !important;
+	--gf-ctrl-btn-letter-spacing: var(--egfw-button-letter-spacing) !important;
+	--gf-ctrl-btn-line-height: var(--egfw-button-line-height) !important;
+	--gf-ctrl-btn-text-decoration: var(--egfw-button-text-decoration) !important;
+	--gf-ctrl-btn-text-transform: var(--egfw-button-text-transform) !important;
+	--gf-local-font-family: var(--egfw-button-font-family) !important;
+	--gf-local-font-size: var(--egfw-button-font-size) !important;
+	--gf-local-font-style: var(--egfw-button-font-style) !important;
+	--gf-local-font-weight: var(--egfw-button-font-weight) !important;
+	--gf-local-letter-spacing: var(--egfw-button-letter-spacing) !important;
+	--gf-local-line-height: var(--egfw-button-line-height) !important;
+	--gf-local-text-decoration: var(--egfw-button-text-decoration) !important;
+	--gf-local-text-transform: var(--egfw-button-text-transform) !important;
+	font-family: var(--egfw-button-font-family) !important;
+	font-size: var(--egfw-button-font-size) !important;
+	font-style: var(--egfw-button-font-style) !important;
+	font-weight: var(--egfw-button-font-weight) !important;
+	letter-spacing: var(--egfw-button-letter-spacing) !important;
+	line-height: var(--egfw-button-line-height) !important;
+	text-decoration: var(--egfw-button-text-decoration) !important;
+	text-transform: var(--egfw-button-text-transform) !important;
 }
 
 .egfw-widget.egfw-has-button-bg .gform_wrapper .gform-theme-button,

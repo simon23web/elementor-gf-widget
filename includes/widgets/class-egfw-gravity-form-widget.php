@@ -698,6 +698,34 @@ class Gravity_Form_Widget extends Widget_Base {
 	}
 
 	/**
+	 * @param mixed $value Typography dimension setting.
+	 * @return string
+	 */
+	private function format_typography_dimension( $value ) {
+		if ( ! is_array( $value ) ) {
+			return '';
+		}
+
+		$size = isset( $value['size'] ) ? $value['size'] : '';
+		$unit = isset( $value['unit'] ) ? (string) $value['unit'] : '';
+
+		if ( '' === $size || '' === $unit ) {
+			return '';
+		}
+
+		if ( ! is_numeric( $size ) ) {
+			return '';
+		}
+
+		$allowed_units = array( 'px', 'em', 'rem', '%', 'vw', 'vh' );
+		if ( ! in_array( $unit, $allowed_units, true ) ) {
+			return '';
+		}
+
+		return $size . $unit;
+	}
+
+	/**
 	 * @param array<string, string> $attributes Shortcode attributes.
 	 * @return string
 	 */
@@ -813,31 +841,20 @@ class Gravity_Form_Widget extends Widget_Base {
 		$input_text_color = isset( $settings['input_color'] )
 			? $this->sanitize_css_color( (string) $settings['input_color'] )
 			: '';
-		$label_text_color = isset( $settings['label_color'] )
-			? $this->sanitize_css_color( (string) $settings['label_color'] )
-			: '';
-		$button_typography_keys = array(
-			'button_typography_typography',
-			'button_typography_font_family',
-			'button_typography_font_size',
-			'button_typography_font_weight',
-			'button_typography_text_transform',
-			'button_typography_font_style',
-			'button_typography_text_decoration',
-			'button_typography_line_height',
-			'button_typography_letter_spacing',
-			'button_typography_word_spacing',
-		);
-		$has_button_typography = false;
-
-		foreach ( $button_typography_keys as $button_typography_key ) {
-			if ( empty( $settings[ $button_typography_key ] ) ) {
-				continue;
-			}
-
-			$has_button_typography = true;
-			break;
-		}
+			$label_text_color = isset( $settings['label_color'] )
+				? $this->sanitize_css_color( (string) $settings['label_color'] )
+				: '';
+			$button_typography_vars = array(
+				'font-family'     => ! empty( $settings['button_typography_font_family'] ) ? sanitize_text_field( (string) $settings['button_typography_font_family'] ) : '',
+				'font-size'       => $this->format_typography_dimension( isset( $settings['button_typography_font_size'] ) ? $settings['button_typography_font_size'] : array() ),
+				'font-weight'     => ! empty( $settings['button_typography_font_weight'] ) ? sanitize_text_field( (string) $settings['button_typography_font_weight'] ) : '',
+				'font-style'      => ! empty( $settings['button_typography_font_style'] ) ? sanitize_text_field( (string) $settings['button_typography_font_style'] ) : '',
+				'text-transform'  => ! empty( $settings['button_typography_text_transform'] ) ? sanitize_text_field( (string) $settings['button_typography_text_transform'] ) : '',
+				'text-decoration' => ! empty( $settings['button_typography_text_decoration'] ) ? sanitize_text_field( (string) $settings['button_typography_text_decoration'] ) : '',
+				'line-height'     => $this->format_typography_dimension( isset( $settings['button_typography_line_height'] ) ? $settings['button_typography_line_height'] : array() ),
+				'letter-spacing'  => $this->format_typography_dimension( isset( $settings['button_typography_letter_spacing'] ) ? $settings['button_typography_letter_spacing'] : array() ),
+			);
+			$has_button_typography = false;
 
 		if ( '' !== $button_background ) {
 			$wrapper_classes[] = 'egfw-has-button-bg';
@@ -883,9 +900,18 @@ class Gravity_Form_Widget extends Widget_Base {
 			$wrapper_styles[]  = '--egfw-gf-label:' . $label_text_color;
 		}
 
-		if ( $has_button_typography ) {
-			$wrapper_classes[] = 'egfw-has-button-typography';
-		}
+			foreach ( $button_typography_vars as $property_name => $property_value ) {
+				if ( '' === $property_value ) {
+					continue;
+				}
+
+				$has_button_typography = true;
+				$wrapper_styles[]      = '--egfw-button-' . $property_name . ':' . $property_value;
+			}
+
+			if ( $has_button_typography ) {
+				$wrapper_classes[] = 'egfw-has-button-typography';
+			}
 
 		$style_attr = '';
 		if ( ! empty( $wrapper_styles ) ) {
