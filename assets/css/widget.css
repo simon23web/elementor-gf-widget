@@ -46,6 +46,25 @@
 	--gf-color-primary-darker: var(--egfw-gf-label) !important;
 }
 
+.egfw-widget.egfw-has-checkbox-label-color .gform_wrapper .gfield_checkbox .gchoice label,
+.egfw-widget.egfw-has-checkbox-label-color .gform_wrapper .gfield--type-consent .gfield_consent_label,
+.egfw-widget.egfw-has-checkbox-label-color .gform_wrapper .ginput_container_consent .gfield_consent_label {
+	color: var(--egfw-checkbox-label-color) !important;
+}
+
+.egfw-widget.egfw-has-checkbox-label-typography .gform_wrapper .gfield_checkbox .gchoice label,
+.egfw-widget.egfw-has-checkbox-label-typography .gform_wrapper .gfield--type-consent .gfield_consent_label,
+.egfw-widget.egfw-has-checkbox-label-typography .gform_wrapper .ginput_container_consent .gfield_consent_label {
+	font-family: var(--egfw-checkbox-label-font-family) !important;
+	font-size: var(--egfw-checkbox-label-font-size) !important;
+	font-style: var(--egfw-checkbox-label-font-style) !important;
+	font-weight: var(--egfw-checkbox-label-font-weight) !important;
+	letter-spacing: var(--egfw-checkbox-label-letter-spacing) !important;
+	line-height: var(--egfw-checkbox-label-line-height) !important;
+	text-decoration: var(--egfw-checkbox-label-text-decoration) !important;
+	text-transform: var(--egfw-checkbox-label-text-transform) !important;
+}
+
 .egfw-widget.egfw-has-button-bg .gform-theme.gform-theme--framework.gform_wrapper {
 	--gf-ctrl-btn-bg-color-primary: var(--egfw-button-bg) !important;
 	--gf-ctrl-btn-border-color-primary: var(--egfw-button-bg) !important;

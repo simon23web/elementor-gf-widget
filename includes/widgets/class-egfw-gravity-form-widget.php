@@ -485,7 +485,7 @@ class Gravity_Form_Widget extends Widget_Base {
 			array(
 				'name'     => 'label_typography',
 				'label'    => esc_html__( 'Label Typography', 'elementor-gf-widget' ),
-				'selector' => '{{WRAPPER}} .egfw-widget .gform_wrapper .gfield_label, {{WRAPPER}} .egfw-widget .gform_wrapper legend.gfield_label, {{WRAPPER}} .egfw-widget .gform_wrapper .gfield_consent_label',
+				'selector' => '{{WRAPPER}} .egfw-widget .gform_wrapper .gfield_label, {{WRAPPER}} .egfw-widget .gform_wrapper legend.gfield_label',
 			)
 		);
 
@@ -493,7 +493,7 @@ class Gravity_Form_Widget extends Widget_Base {
 			'checkbox_label_typography_note',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => esc_html__( 'Use Checkbox Label Typography to style checkbox choice labels separately from field labels.', 'elementor-gf-widget' ),
+				'raw'             => esc_html__( 'Use this to style checkbox and consent option labels separately from field labels.', 'elementor-gf-widget' ),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 			)
 		);
@@ -502,18 +502,18 @@ class Gravity_Form_Widget extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'checkbox_label_typography',
-				'label'    => esc_html__( 'Checkbox Label Typography', 'elementor-gf-widget' ),
-				'selector' => '{{WRAPPER}} .egfw-widget .gform_wrapper .gfield_checkbox .gchoice label',
+				'label'    => esc_html__( 'Option Label Typography', 'elementor-gf-widget' ),
+				'selector' => '{{WRAPPER}} .egfw-widget',
 			)
 		);
 
 		$this->add_control(
 			'checkbox_label_color',
 			array(
-				'label'     => esc_html__( 'Checkbox Label Color', 'elementor-gf-widget' ),
+				'label'     => esc_html__( 'Option Label Color', 'elementor-gf-widget' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .egfw-widget .gform_wrapper .gfield_checkbox .gchoice label' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .egfw-widget .gform_wrapper .gfield_checkbox .gchoice label, {{WRAPPER}} .egfw-widget .gform_wrapper .gfield--type-consent .gfield_consent_label, {{WRAPPER}} .egfw-widget .gform_wrapper .ginput_container_consent .gfield_consent_label' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -884,12 +884,15 @@ class Gravity_Form_Widget extends Widget_Base {
 			$input_text_color = isset( $settings['input_color'] )
 				? $this->sanitize_css_color( (string) $settings['input_color'] )
 				: '';
-		$danger_color = isset( $settings['danger_color'] )
-			? $this->sanitize_css_color( (string) $settings['danger_color'] )
+			$danger_color = isset( $settings['danger_color'] )
+				? $this->sanitize_css_color( (string) $settings['danger_color'] )
+				: '';
+		$checkbox_label_color = isset( $settings['checkbox_label_color'] )
+			? $this->sanitize_css_color( (string) $settings['checkbox_label_color'] )
 			: '';
-				$label_text_color = isset( $settings['label_color'] )
-					? $this->sanitize_css_color( (string) $settings['label_color'] )
-					: '';
+					$label_text_color = isset( $settings['label_color'] )
+						? $this->sanitize_css_color( (string) $settings['label_color'] )
+						: '';
 			$button_typography_vars = array(
 				'font-family'     => ! empty( $settings['button_typography_font_family'] ) ? sanitize_text_field( (string) $settings['button_typography_font_family'] ) : '',
 				'font-size'       => $this->format_typography_dimension( isset( $settings['button_typography_font_size'] ) ? $settings['button_typography_font_size'] : array() ),
@@ -899,8 +902,19 @@ class Gravity_Form_Widget extends Widget_Base {
 				'text-decoration' => ! empty( $settings['button_typography_text_decoration'] ) ? sanitize_text_field( (string) $settings['button_typography_text_decoration'] ) : '',
 				'line-height'     => $this->format_typography_dimension( isset( $settings['button_typography_line_height'] ) ? $settings['button_typography_line_height'] : array() ),
 				'letter-spacing'  => $this->format_typography_dimension( isset( $settings['button_typography_letter_spacing'] ) ? $settings['button_typography_letter_spacing'] : array() ),
-			);
-			$has_button_typography = false;
+				);
+				$has_button_typography = false;
+		$checkbox_label_typography_vars = array(
+			'font-family'     => ! empty( $settings['checkbox_label_typography_font_family'] ) ? sanitize_text_field( (string) $settings['checkbox_label_typography_font_family'] ) : '',
+			'font-size'       => $this->format_typography_dimension( isset( $settings['checkbox_label_typography_font_size'] ) ? $settings['checkbox_label_typography_font_size'] : array() ),
+			'font-weight'     => ! empty( $settings['checkbox_label_typography_font_weight'] ) ? sanitize_text_field( (string) $settings['checkbox_label_typography_font_weight'] ) : '',
+			'font-style'      => ! empty( $settings['checkbox_label_typography_font_style'] ) ? sanitize_text_field( (string) $settings['checkbox_label_typography_font_style'] ) : '',
+			'text-transform'  => ! empty( $settings['checkbox_label_typography_text_transform'] ) ? sanitize_text_field( (string) $settings['checkbox_label_typography_text_transform'] ) : '',
+			'text-decoration' => ! empty( $settings['checkbox_label_typography_text_decoration'] ) ? sanitize_text_field( (string) $settings['checkbox_label_typography_text_decoration'] ) : '',
+			'line-height'     => $this->format_typography_dimension( isset( $settings['checkbox_label_typography_line_height'] ) ? $settings['checkbox_label_typography_line_height'] : array() ),
+			'letter-spacing'  => $this->format_typography_dimension( isset( $settings['checkbox_label_typography_letter_spacing'] ) ? $settings['checkbox_label_typography_letter_spacing'] : array() ),
+		);
+		$has_checkbox_label_typography = false;
 
 		if ( '' !== $button_background ) {
 			$wrapper_classes[] = 'egfw-has-button-bg';
@@ -946,10 +960,15 @@ class Gravity_Form_Widget extends Widget_Base {
 			$wrapper_styles[]  = '--egfw-gf-danger:' . $danger_color;
 		}
 
+		if ( '' !== $checkbox_label_color ) {
+			$wrapper_classes[] = 'egfw-has-checkbox-label-color';
+			$wrapper_styles[]  = '--egfw-checkbox-label-color:' . $checkbox_label_color;
+		}
+
 			if ( '' !== $label_text_color ) {
 				$wrapper_classes[] = 'egfw-has-gf-label';
 				$wrapper_styles[]  = '--egfw-gf-label:' . $label_text_color;
-		}
+			}
 
 			foreach ( $button_typography_vars as $property_name => $property_value ) {
 				if ( '' === $property_value ) {
@@ -963,6 +982,19 @@ class Gravity_Form_Widget extends Widget_Base {
 			if ( $has_button_typography ) {
 				$wrapper_classes[] = 'egfw-has-button-typography';
 			}
+
+		foreach ( $checkbox_label_typography_vars as $property_name => $property_value ) {
+			if ( '' === $property_value ) {
+				continue;
+			}
+
+			$has_checkbox_label_typography = true;
+			$wrapper_styles[]              = '--egfw-checkbox-label-' . $property_name . ':' . $property_value;
+		}
+
+		if ( $has_checkbox_label_typography ) {
+			$wrapper_classes[] = 'egfw-has-checkbox-label-typography';
+		}
 
 		$style_attr = '';
 		if ( ! empty( $wrapper_styles ) ) {
