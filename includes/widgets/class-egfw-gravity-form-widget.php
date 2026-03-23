@@ -485,7 +485,36 @@ class Gravity_Form_Widget extends Widget_Base {
 			array(
 				'name'     => 'label_typography',
 				'label'    => esc_html__( 'Label Typography', 'elementor-gf-widget' ),
-				'selector' => '{{WRAPPER}} .egfw-widget .gform_wrapper .gfield_label, {{WRAPPER}} .egfw-widget .gform_wrapper legend.gfield_label, {{WRAPPER}} .egfw-widget .gform_wrapper .gchoice label, {{WRAPPER}} .egfw-widget .gform_wrapper .gfield_consent_label',
+				'selector' => '{{WRAPPER}} .egfw-widget .gform_wrapper .gfield_label, {{WRAPPER}} .egfw-widget .gform_wrapper legend.gfield_label, {{WRAPPER}} .egfw-widget .gform_wrapper .gfield_consent_label',
+			)
+		);
+
+		$this->add_control(
+			'checkbox_label_typography_note',
+			array(
+				'type'            => Controls_Manager::RAW_HTML,
+				'raw'             => esc_html__( 'Use Checkbox Label Typography to style checkbox choice labels separately from field labels.', 'elementor-gf-widget' ),
+				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'checkbox_label_typography',
+				'label'    => esc_html__( 'Checkbox Label Typography', 'elementor-gf-widget' ),
+				'selector' => '{{WRAPPER}} .egfw-widget .gform_wrapper .gfield_checkbox .gchoice label',
+			)
+		);
+
+		$this->add_control(
+			'checkbox_label_color',
+			array(
+				'label'     => esc_html__( 'Checkbox Label Color', 'elementor-gf-widget' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .egfw-widget .gform_wrapper .gfield_checkbox .gchoice label' => 'color: {{VALUE}};',
+				),
 			)
 		);
 
