@@ -493,7 +493,7 @@ class Gravity_Form_Widget extends Widget_Base {
 			'checkbox_label_typography_note',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
-				'raw'             => esc_html__( 'Use this to style checkbox and consent option labels separately from field labels.', 'elementor-gf-widget' ),
+				'raw'             => esc_html__( 'Use these controls to style checkbox and consent option labels separately from field labels and legends.', 'elementor-gf-widget' ),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 			)
 		);
@@ -502,7 +502,7 @@ class Gravity_Form_Widget extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'checkbox_label_typography',
-				'label'    => esc_html__( 'Option Label Typography', 'elementor-gf-widget' ),
+				'label'    => esc_html__( 'Checkbox / Consent Label Typography', 'elementor-gf-widget' ),
 				'selector' => '{{WRAPPER}} .egfw-widget',
 			)
 		);
@@ -510,7 +510,7 @@ class Gravity_Form_Widget extends Widget_Base {
 		$this->add_control(
 			'checkbox_label_color',
 			array(
-				'label'     => esc_html__( 'Option Label Color', 'elementor-gf-widget' ),
+				'label'     => esc_html__( 'Checkbox / Consent Label Color', 'elementor-gf-widget' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .egfw-widget .gform_wrapper .gfield_checkbox .gchoice label, {{WRAPPER}} .egfw-widget .gform_wrapper .gfield--type-consent .gfield_consent_label, {{WRAPPER}} .egfw-widget .gform_wrapper .ginput_container_consent .gfield_consent_label' => 'color: {{VALUE}};',
