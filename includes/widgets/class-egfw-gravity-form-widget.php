@@ -269,6 +269,20 @@ class Gravity_Form_Widget extends Widget_Base {
 				'condition' => array(
 					'theme' => 'orbital',
 				),
+				)
+			);
+
+		$this->add_control(
+			'danger_color',
+			array(
+				'label'     => esc_html__( 'Danger Color', 'elementor-gf-widget' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .egfw-widget .gform-theme.gform-theme--framework.gform_wrapper' => '--gf-color-danger: {{VALUE}};',
+				),
+				'condition' => array(
+					'theme' => 'orbital',
+				),
 			)
 		);
 
@@ -838,12 +852,15 @@ class Gravity_Form_Widget extends Widget_Base {
 		$input_background_color = isset( $settings['input_background_color'] )
 			? $this->sanitize_css_color( (string) $settings['input_background_color'] )
 			: '';
-		$input_text_color = isset( $settings['input_color'] )
-			? $this->sanitize_css_color( (string) $settings['input_color'] )
-			: '';
-			$label_text_color = isset( $settings['label_color'] )
-				? $this->sanitize_css_color( (string) $settings['label_color'] )
+			$input_text_color = isset( $settings['input_color'] )
+				? $this->sanitize_css_color( (string) $settings['input_color'] )
 				: '';
+		$danger_color = isset( $settings['danger_color'] )
+			? $this->sanitize_css_color( (string) $settings['danger_color'] )
+			: '';
+				$label_text_color = isset( $settings['label_color'] )
+					? $this->sanitize_css_color( (string) $settings['label_color'] )
+					: '';
 			$button_typography_vars = array(
 				'font-family'     => ! empty( $settings['button_typography_font_family'] ) ? sanitize_text_field( (string) $settings['button_typography_font_family'] ) : '',
 				'font-size'       => $this->format_typography_dimension( isset( $settings['button_typography_font_size'] ) ? $settings['button_typography_font_size'] : array() ),
@@ -890,14 +907,19 @@ class Gravity_Form_Widget extends Widget_Base {
 			$wrapper_styles[]  = '--egfw-gf-surface:' . $input_background_color;
 		}
 
-		if ( '' !== $input_text_color ) {
-			$wrapper_classes[] = 'egfw-has-gf-text';
-			$wrapper_styles[]  = '--egfw-gf-text:' . $input_text_color;
+			if ( '' !== $input_text_color ) {
+				$wrapper_classes[] = 'egfw-has-gf-text';
+				$wrapper_styles[]  = '--egfw-gf-text:' . $input_text_color;
+			}
+
+		if ( '' !== $danger_color ) {
+			$wrapper_classes[] = 'egfw-has-gf-danger';
+			$wrapper_styles[]  = '--egfw-gf-danger:' . $danger_color;
 		}
 
-		if ( '' !== $label_text_color ) {
-			$wrapper_classes[] = 'egfw-has-gf-label';
-			$wrapper_styles[]  = '--egfw-gf-label:' . $label_text_color;
+			if ( '' !== $label_text_color ) {
+				$wrapper_classes[] = 'egfw-has-gf-label';
+				$wrapper_styles[]  = '--egfw-gf-label:' . $label_text_color;
 		}
 
 			foreach ( $button_typography_vars as $property_name => $property_value ) {

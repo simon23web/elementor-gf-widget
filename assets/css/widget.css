@@ -38,6 +38,10 @@
 	--gf-color-in-ctrl-primary: var(--egfw-gf-text) !important;
 }
 
+.egfw-widget.egfw-has-gf-danger .gform-theme.gform-theme--framework.gform_wrapper {
+	--gf-color-danger: var(--egfw-gf-danger) !important;
+}
+
 .egfw-widget.egfw-has-gf-label .gform-theme.gform-theme--framework.gform_wrapper {
 	--gf-color-primary-darker: var(--egfw-gf-label) !important;
 }
