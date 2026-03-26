@@ -38,6 +38,10 @@
 	--gf-color-in-ctrl-primary: var(--egfw-gf-text) !important;
 }
 
+.egfw-widget.egfw-has-gf-placeholder .gform-theme.gform-theme--framework.gform_wrapper {
+	--gf-ctrl-placeholder-color: var(--egfw-gf-placeholder) !important;
+}
+
 .egfw-widget.egfw-has-gf-placeholder .gform_wrapper input::placeholder,
 .egfw-widget.egfw-has-gf-placeholder .gform_wrapper textarea::placeholder,
 .egfw-widget.egfw-has-gf-placeholder .gform-theme.gform-theme--framework.gform_wrapper input::placeholder,
