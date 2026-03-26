@@ -212,6 +212,28 @@ class Gravity_Form_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
+			'input_placeholder_color',
+			array(
+				'label'     => esc_html__( 'Placeholder Color', 'elementor-gf-widget' ),
+				'type'      => Controls_Manager::COLOR,
+				'condition' => array(
+					'theme' => 'orbital',
+				),
+			)
+		);
+
+		$this->add_control(
+			'input_focus_outline_color',
+			array(
+				'label'     => esc_html__( 'Focus Outline Color', 'elementor-gf-widget' ),
+				'type'      => Controls_Manager::COLOR,
+				'condition' => array(
+					'theme' => 'orbital',
+				),
+			)
+		);
+
+		$this->add_control(
 			'input_primary_color',
 			array(
 				'label'     => esc_html__( 'Input Primary Color', 'elementor-gf-widget' ),
@@ -881,12 +903,18 @@ class Gravity_Form_Widget extends Widget_Base {
 		$input_background_color = isset( $settings['input_background_color'] )
 			? $this->sanitize_css_color( (string) $settings['input_background_color'] )
 			: '';
-			$input_text_color = isset( $settings['input_color'] )
-				? $this->sanitize_css_color( (string) $settings['input_color'] )
-				: '';
-			$danger_color = isset( $settings['danger_color'] )
-				? $this->sanitize_css_color( (string) $settings['danger_color'] )
-				: '';
+		$input_text_color = isset( $settings['input_color'] )
+			? $this->sanitize_css_color( (string) $settings['input_color'] )
+			: '';
+		$input_placeholder_color = isset( $settings['input_placeholder_color'] )
+			? $this->sanitize_css_color( (string) $settings['input_placeholder_color'] )
+			: '';
+		$input_focus_outline_color = isset( $settings['input_focus_outline_color'] )
+			? $this->sanitize_css_color( (string) $settings['input_focus_outline_color'] )
+			: '';
+		$danger_color = isset( $settings['danger_color'] )
+			? $this->sanitize_css_color( (string) $settings['danger_color'] )
+			: '';
 		$checkbox_label_color = isset( $settings['checkbox_label_color'] )
 			? $this->sanitize_css_color( (string) $settings['checkbox_label_color'] )
 			: '';
@@ -950,10 +978,20 @@ class Gravity_Form_Widget extends Widget_Base {
 			$wrapper_styles[]  = '--egfw-gf-surface:' . $input_background_color;
 		}
 
-			if ( '' !== $input_text_color ) {
-				$wrapper_classes[] = 'egfw-has-gf-text';
-				$wrapper_styles[]  = '--egfw-gf-text:' . $input_text_color;
-			}
+		if ( '' !== $input_text_color ) {
+			$wrapper_classes[] = 'egfw-has-gf-text';
+			$wrapper_styles[]  = '--egfw-gf-text:' . $input_text_color;
+		}
+
+		if ( '' !== $input_placeholder_color ) {
+			$wrapper_classes[] = 'egfw-has-gf-placeholder';
+			$wrapper_styles[]  = '--egfw-gf-placeholder:' . $input_placeholder_color;
+		}
+
+		if ( '' !== $input_focus_outline_color ) {
+			$wrapper_classes[] = 'egfw-has-gf-focus-outline';
+			$wrapper_styles[]  = '--egfw-gf-focus-outline:' . $input_focus_outline_color;
+		}
 
 		if ( '' !== $danger_color ) {
 			$wrapper_classes[] = 'egfw-has-gf-danger';

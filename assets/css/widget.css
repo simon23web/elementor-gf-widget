@@ -38,6 +38,41 @@
 	--gf-color-in-ctrl-primary: var(--egfw-gf-text) !important;
 }
 
+.egfw-widget.egfw-has-gf-placeholder .gform_wrapper input::placeholder,
+.egfw-widget.egfw-has-gf-placeholder .gform_wrapper textarea::placeholder,
+.egfw-widget.egfw-has-gf-placeholder .gform-theme.gform-theme--framework.gform_wrapper input::placeholder,
+.egfw-widget.egfw-has-gf-placeholder .gform-theme.gform-theme--framework.gform_wrapper textarea::placeholder {
+	color: var(--egfw-gf-placeholder) !important;
+	opacity: 1;
+}
+
+.egfw-widget.egfw-has-gf-focus-outline .gform_wrapper input:focus,
+.egfw-widget.egfw-has-gf-focus-outline .gform_wrapper input:focus-visible,
+.egfw-widget.egfw-has-gf-focus-outline .gform_wrapper textarea:focus,
+.egfw-widget.egfw-has-gf-focus-outline .gform_wrapper textarea:focus-visible,
+.egfw-widget.egfw-has-gf-focus-outline .gform_wrapper select:focus,
+.egfw-widget.egfw-has-gf-focus-outline .gform_wrapper select:focus-visible,
+.egfw-widget.egfw-has-gf-focus-outline .gform-theme.gform-theme--framework.gform_wrapper {
+	--gf-ctrl-outline-color-focus: var(--egfw-gf-focus-outline) !important;
+}
+
+.egfw-widget.egfw-has-gf-focus-outline .gform_wrapper input:focus,
+.egfw-widget.egfw-has-gf-focus-outline .gform_wrapper input:focus-visible,
+.egfw-widget.egfw-has-gf-focus-outline .gform_wrapper textarea:focus,
+.egfw-widget.egfw-has-gf-focus-outline .gform_wrapper textarea:focus-visible,
+.egfw-widget.egfw-has-gf-focus-outline .gform_wrapper select:focus,
+.egfw-widget.egfw-has-gf-focus-outline .gform_wrapper select:focus-visible,
+.egfw-widget.egfw-has-gf-focus-outline .gform-theme.gform-theme--framework.gform_wrapper input:focus,
+.egfw-widget.egfw-has-gf-focus-outline .gform-theme.gform-theme--framework.gform_wrapper input:focus-visible,
+.egfw-widget.egfw-has-gf-focus-outline .gform-theme.gform-theme--framework.gform_wrapper textarea:focus,
+.egfw-widget.egfw-has-gf-focus-outline .gform-theme.gform-theme--framework.gform_wrapper textarea:focus-visible,
+.egfw-widget.egfw-has-gf-focus-outline .gform-theme.gform-theme--framework.gform_wrapper select:focus,
+.egfw-widget.egfw-has-gf-focus-outline .gform-theme.gform-theme--framework.gform_wrapper select:focus-visible {
+	border-color: var(--egfw-gf-focus-outline) !important;
+	box-shadow: 0 0 0 1px var(--egfw-gf-focus-outline) !important;
+	outline-color: var(--egfw-gf-focus-outline) !important;
+}
+
 .egfw-widget.egfw-has-gf-danger .gform-theme.gform-theme--framework.gform_wrapper {
 	--gf-color-danger: var(--egfw-gf-danger) !important;
 }
