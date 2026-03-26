@@ -236,7 +236,7 @@ class Gravity_Form_Widget extends Widget_Base {
 		$this->add_control(
 			'input_primary_color',
 			array(
-				'label'     => esc_html__( 'Input Primary Color', 'elementor-gf-widget' ),
+				'label'     => esc_html__( 'GF Theme Primary Color', 'elementor-gf-widget' ),
 				'type'      => Controls_Manager::COLOR,
 				'condition' => array(
 					'theme' => 'orbital',
@@ -906,6 +906,9 @@ class Gravity_Form_Widget extends Widget_Base {
 		$input_text_color = isset( $settings['input_color'] )
 			? $this->sanitize_css_color( (string) $settings['input_color'] )
 			: '';
+		$input_primary_color = isset( $settings['input_primary_color'] )
+			? $this->sanitize_css_color( (string) $settings['input_primary_color'] )
+			: '';
 		$input_placeholder_color = isset( $settings['input_placeholder_color'] )
 			? $this->sanitize_css_color( (string) $settings['input_placeholder_color'] )
 			: '';
@@ -979,8 +982,13 @@ class Gravity_Form_Widget extends Widget_Base {
 		}
 
 		if ( '' !== $input_text_color ) {
-			$wrapper_classes[] = 'egfw-has-gf-text';
-			$wrapper_styles[]  = '--egfw-gf-text:' . $input_text_color;
+			$wrapper_classes[] = 'egfw-has-input-text';
+			$wrapper_styles[]  = '--egfw-input-text:' . $input_text_color;
+		}
+
+		if ( '' !== $input_primary_color ) {
+			$wrapper_classes[] = 'egfw-has-gf-input-primary';
+			$wrapper_styles[]  = '--egfw-gf-input-primary:' . $input_primary_color;
 		}
 
 		if ( '' !== $input_placeholder_color ) {

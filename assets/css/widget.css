@@ -34,8 +34,17 @@
 	--gf-color-in-ctrl: var(--egfw-gf-surface) !important;
 }
 
-.egfw-widget.egfw-has-gf-text .gform-theme.gform-theme--framework.gform_wrapper {
-	--gf-color-in-ctrl-primary: var(--egfw-gf-text) !important;
+.egfw-widget.egfw-has-input-text .gform_wrapper input,
+.egfw-widget.egfw-has-input-text .gform_wrapper textarea,
+.egfw-widget.egfw-has-input-text .gform_wrapper select,
+.egfw-widget.egfw-has-input-text .gform-theme.gform-theme--framework.gform_wrapper input,
+.egfw-widget.egfw-has-input-text .gform-theme.gform-theme--framework.gform_wrapper textarea,
+.egfw-widget.egfw-has-input-text .gform-theme.gform-theme--framework.gform_wrapper select {
+	color: var(--egfw-input-text) !important;
+}
+
+.egfw-widget.egfw-has-gf-input-primary .gform-theme.gform-theme--framework.gform_wrapper {
+	--gf-color-in-ctrl-primary: var(--egfw-gf-input-primary) !important;
 }
 
 .egfw-widget.egfw-has-gf-placeholder .gform-theme.gform-theme--framework.gform_wrapper {
