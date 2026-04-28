@@ -979,6 +979,10 @@ class Gravity_Form_Widget extends Widget_Base {
 		$button_hover_color      = isset( $settings['button_hover_color'] )
 			? $this->sanitize_css_color( (string) $settings['button_hover_color'] )
 			: '';
+		$button_border_style = ! empty( $settings['button_border_style'] )
+			? sanitize_key( (string) $settings['button_border_style'] )
+			: '';
+		$button_border_width = $this->format_typography_dimension( isset( $settings['button_border_width'] ) ? $settings['button_border_width'] : array() );
 		$button_border_color = isset( $settings['button_border_color'] )
 			? $this->sanitize_css_color( (string) $settings['button_border_color'] )
 			: '';
@@ -1057,6 +1061,16 @@ class Gravity_Form_Widget extends Widget_Base {
 		if ( '' !== $button_hover_color ) {
 			$wrapper_classes[] = 'egfw-has-button-hover-color';
 			$wrapper_styles[]  = '--egfw-button-hover-color:' . $button_hover_color;
+		}
+
+		if ( '' !== $button_border_style ) {
+			$wrapper_classes[] = 'egfw-has-button-border-style';
+			$wrapper_styles[]  = '--egfw-button-border-style:' . $button_border_style;
+		}
+
+		if ( '' !== $button_border_width ) {
+			$wrapper_classes[] = 'egfw-has-button-border-width';
+			$wrapper_styles[]  = '--egfw-button-border-width:' . $button_border_width;
 		}
 
 		if ( '' !== $button_border_color ) {

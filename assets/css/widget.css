@@ -143,6 +143,44 @@
 	--gf-ctrl-btn-color-hover-secondary: var(--egfw-button-hover-color) !important;
 }
 
+.egfw-widget.egfw-has-button-border-color .gform-theme.gform-theme--framework.gform_wrapper {
+	--gf-ctrl-btn-border-color-primary: var(--egfw-button-border-color) !important;
+	--gf-ctrl-btn-border-color-secondary: var(--egfw-button-border-color) !important;
+}
+
+.egfw-widget.egfw-has-button-hover-border-color .gform-theme.gform-theme--framework.gform_wrapper {
+	--gf-ctrl-btn-border-color-hover-primary: var(--egfw-button-hover-border-color) !important;
+	--gf-ctrl-btn-border-color-hover-secondary: var(--egfw-button-hover-border-color) !important;
+}
+
+.egfw-widget.egfw-has-button-border-style .gform-theme.gform-theme--framework.gform_wrapper .gform-theme-button,
+.egfw-widget.egfw-has-button-border-style .gform-theme.gform-theme--framework.gform_wrapper .gform-theme-button--control,
+.egfw-widget.egfw-has-button-border-style .gform-theme.gform-theme--framework.gform_wrapper .gform_button,
+.egfw-widget.egfw-has-button-border-style .gform-theme.gform-theme--framework.gform_wrapper .gform_next_button,
+.egfw-widget.egfw-has-button-border-style .gform-theme.gform-theme--framework.gform_wrapper .gform_previous_button,
+.egfw-widget.egfw-has-button-border-style .gform-theme.gform-theme--framework.gform_wrapper .gform_page_footer .button,
+.egfw-widget.egfw-has-button-border-style .gform-theme.gform-theme--framework.gform_wrapper .gform_save_link.button,
+.egfw-widget.egfw-has-button-border-style .gform-theme.gform-theme--framework.gform_wrapper input[type="submit"],
+.egfw-widget.egfw-has-button-border-style .gform-theme.gform-theme--framework.gform_wrapper input[type="button"],
+.egfw-widget.egfw-has-button-border-style .gform-theme.gform-theme--framework.gform_wrapper button[type="submit"] {
+	--gf-local-border-style: var(--egfw-button-border-style) !important;
+	border-style: var(--egfw-button-border-style) !important;
+}
+
+.egfw-widget.egfw-has-button-border-width .gform-theme.gform-theme--framework.gform_wrapper .gform-theme-button,
+.egfw-widget.egfw-has-button-border-width .gform-theme.gform-theme--framework.gform_wrapper .gform-theme-button--control,
+.egfw-widget.egfw-has-button-border-width .gform-theme.gform-theme--framework.gform_wrapper .gform_button,
+.egfw-widget.egfw-has-button-border-width .gform-theme.gform-theme--framework.gform_wrapper .gform_next_button,
+.egfw-widget.egfw-has-button-border-width .gform-theme.gform-theme--framework.gform_wrapper .gform_previous_button,
+.egfw-widget.egfw-has-button-border-width .gform-theme.gform-theme--framework.gform_wrapper .gform_page_footer .button,
+.egfw-widget.egfw-has-button-border-width .gform-theme.gform-theme--framework.gform_wrapper .gform_save_link.button,
+.egfw-widget.egfw-has-button-border-width .gform-theme.gform-theme--framework.gform_wrapper input[type="submit"],
+.egfw-widget.egfw-has-button-border-width .gform-theme.gform-theme--framework.gform_wrapper input[type="button"],
+.egfw-widget.egfw-has-button-border-width .gform-theme.gform-theme--framework.gform_wrapper button[type="submit"] {
+	--gf-local-border-width: var(--egfw-button-border-width) !important;
+	border-width: var(--egfw-button-border-width) !important;
+}
+
 .egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper .button,
 .egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper .gform-theme-button,
 .egfw-widget.egfw-has-button-typography .gform-theme.gform-theme--framework.gform_wrapper .gform_button,
@@ -195,6 +233,20 @@
 	border-color: var(--egfw-button-bg) !important;
 }
 
+.egfw-widget.egfw-has-button-border-color .gform_wrapper .gform-theme-button,
+.egfw-widget.egfw-has-button-border-color .gform_wrapper .gform-theme-button--control,
+.egfw-widget.egfw-has-button-border-color .gform_wrapper .gform_button,
+.egfw-widget.egfw-has-button-border-color .gform_wrapper .gform_next_button,
+.egfw-widget.egfw-has-button-border-color .gform_wrapper .gform_previous_button,
+.egfw-widget.egfw-has-button-border-color .gform_wrapper .gform_page_footer .button,
+.egfw-widget.egfw-has-button-border-color .gform_wrapper .gform_save_link.button,
+.egfw-widget.egfw-has-button-border-color .gform_wrapper input[type="submit"],
+.egfw-widget.egfw-has-button-border-color .gform_wrapper input[type="button"],
+.egfw-widget.egfw-has-button-border-color .gform_wrapper button[type="submit"] {
+	--gf-local-border-color: var(--egfw-button-border-color) !important;
+	border-color: var(--egfw-button-border-color) !important;
+}
+
 .egfw-widget.egfw-has-button-bg .gform_wrapper .gform-theme-button:hover,
 .egfw-widget.egfw-has-button-bg .gform_wrapper .gform-theme-button:focus,
 .egfw-widget.egfw-has-button-bg .gform_wrapper .gform_button:hover,
@@ -207,6 +259,28 @@
 	--gf-local-border-color: var(--egfw-button-bg) !important;
 	background-color: var(--egfw-button-bg) !important;
 	border-color: var(--egfw-button-bg) !important;
+}
+
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper .gform-theme-button:hover,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper .gform-theme-button:focus,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper .gform_button:hover,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper .gform_button:focus,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper .gform_next_button:hover,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper .gform_next_button:focus,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper .gform_previous_button:hover,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper .gform_previous_button:focus,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper .gform_page_footer .button:hover,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper .gform_page_footer .button:focus,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper .gform_save_link.button:hover,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper .gform_save_link.button:focus,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper input[type="submit"]:hover,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper input[type="submit"]:focus,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper input[type="button"]:hover,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper input[type="button"]:focus,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper button[type="submit"]:hover,
+.egfw-widget.egfw-has-button-hover-border-color .gform_wrapper button[type="submit"]:focus {
+	--gf-local-border-color: var(--egfw-button-hover-border-color) !important;
+	border-color: var(--egfw-button-hover-border-color) !important;
 }
 
 .egfw-widget.egfw-has-button-hover-bg .gform_wrapper .gform-theme-button:hover,
