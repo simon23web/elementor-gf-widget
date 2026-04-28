@@ -355,6 +355,73 @@ class Gravity_Form_Widget extends Widget_Base {
 		);
 
 		$this->add_control(
+			'button_border_style',
+			array(
+				'label'     => esc_html__( 'Button Border Style', 'elementor-gf-widget' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => '',
+				'options'   => array(
+					''       => esc_html__( 'Default', 'elementor-gf-widget' ),
+					'none'   => esc_html__( 'None', 'elementor-gf-widget' ),
+					'solid'  => esc_html__( 'Solid', 'elementor-gf-widget' ),
+					'dashed' => esc_html__( 'Dashed', 'elementor-gf-widget' ),
+					'dotted' => esc_html__( 'Dotted', 'elementor-gf-widget' ),
+					'double' => esc_html__( 'Double', 'elementor-gf-widget' ),
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_next_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_previous_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="submit"], {{WRAPPER}} .egfw-widget .gform_wrapper input[type="button"], {{WRAPPER}} .egfw-widget .gform_wrapper button[type="submit"]' => 'border-style: {{VALUE}};',
+				),
+				'condition' => array(
+					'theme' => 'orbital',
+				),
+			)
+		);
+
+		$this->add_responsive_control(
+			'button_border_width',
+			array(
+				'label'      => esc_html__( 'Button Border Width', 'elementor-gf-widget' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'em', 'rem' ),
+				'range'      => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 20,
+					),
+					'em' => array(
+						'min' => 0,
+						'max' => 2,
+					),
+					'rem' => array(
+						'min' => 0,
+						'max' => 2,
+					),
+				),
+				'selectors'  => array(
+					'{{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_next_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_previous_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="submit"], {{WRAPPER}} .egfw-widget .gform_wrapper input[type="button"], {{WRAPPER}} .egfw-widget .gform_wrapper button[type="submit"]' => 'border-width: {{SIZE}}{{UNIT}};',
+				),
+				'condition'  => array(
+					'theme' => 'orbital',
+				),
+			)
+		);
+
+		$this->add_control(
+			'button_border_color',
+			array(
+				'label'     => esc_html__( 'Button Border Color', 'elementor-gf-widget' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .egfw-widget .gform-theme.gform-theme--framework.gform_wrapper' => '--gf-ctrl-btn-border-color-primary: {{VALUE}}; --gf-ctrl-btn-border-color-secondary: {{VALUE}};',
+					'{{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_next_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_previous_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="submit"], {{WRAPPER}} .egfw-widget .gform_wrapper input[type="button"], {{WRAPPER}} .egfw-widget .gform_wrapper button[type="submit"]' => '--gf-local-border-color: {{VALUE}}; border-color: {{VALUE}};',
+				),
+				'condition' => array(
+					'theme' => 'orbital',
+				),
+			)
+		);
+
+		$this->add_control(
 			'button_primary_color',
 			array(
 				'label'     => esc_html__( 'Button Text Color', 'elementor-gf-widget' ),
@@ -401,6 +468,21 @@ class Gravity_Form_Widget extends Widget_Base {
 			);
 
 		$this->add_control(
+			'button_hover_border_color',
+			array(
+				'label'     => esc_html__( 'Button Hover Border Color', 'elementor-gf-widget' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .egfw-widget .gform-theme.gform-theme--framework.gform_wrapper' => '--gf-ctrl-btn-border-color-hover-primary: {{VALUE}}; --gf-ctrl-btn-border-color-hover-secondary: {{VALUE}};',
+					'{{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_next_button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_next_button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_previous_button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_previous_button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button:hover, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button:focus, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="submit"]:hover, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="submit"]:focus, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="button"]:hover, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="button"]:focus, {{WRAPPER}} .egfw-widget .gform_wrapper button[type="submit"]:hover, {{WRAPPER}} .egfw-widget .gform_wrapper button[type="submit"]:focus' => '--gf-local-border-color: {{VALUE}}; border-color: {{VALUE}};',
+				),
+				'condition' => array(
+					'theme' => 'orbital',
+				),
+			)
+		);
+
+		$this->add_control(
 			'button_typography_note',
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
@@ -414,7 +496,7 @@ class Gravity_Form_Widget extends Widget_Base {
 			array(
 				'name'     => 'button_typography',
 				'label'    => esc_html__( 'Button Typography', 'elementor-gf-widget' ),
-				'selector' => '{{WRAPPER}} .egfw-widget',
+				'selector' => '{{WRAPPER}} .egfw-widget .gform_wrapper .gform-theme-button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_next_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_previous_button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_page_footer .button, {{WRAPPER}} .egfw-widget .gform_wrapper .gform_save_link.button, {{WRAPPER}} .egfw-widget .gform_wrapper input[type="submit"], {{WRAPPER}} .egfw-widget .gform_wrapper input[type="button"], {{WRAPPER}} .egfw-widget .gform_wrapper button[type="submit"]',
 			)
 		);
 
